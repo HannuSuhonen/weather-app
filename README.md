@@ -1,3 +1,3 @@
-# todo-app
+# weather-app
 
 A straightforward to use weather app to track the weather across the world!
