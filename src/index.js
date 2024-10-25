@@ -24,30 +24,43 @@ button.onclick = () => {
         data.sunrise = sunrise;
         data.sunset = sunset;
 
-        let background = document.createElement("img");
-
-        console.log(weatherData.tzoffset);
-
         let currentTime = getCurrentTimeInOffset(weatherData.tzoffset);
+        let currenttext = document.createElement("h2");
+
+        currenttext.textContent = "Current time: " + currentTime;
 
         let timeofday = getTimeOfDay(currentTime,sunrise,sunset);
-        
+
         if(timeofday === "morning"){
-            background.src = morningimage;
+            currenttext.style.color = "black";
+            content.style.backgroundImage = `url(${morningimage})`;
         }else if(timeofday === "afternoon"){
-            background.src = afternoonimage;
+            currenttext.style.color = "black";
+            content.style.backgroundImage = `url(${afternoonimage})`;
         }else if(timeofday === "evening"){
-            background.src = eveningimage;
+            currenttext.style.color = "black";
+            content.style.backgroundImage = `url(${eveningimage})`;
         }else{
-            background.src = nightimage;
+            currenttext.style.color = "white";
+            content.style.backgroundImage = `url(${nightimage})`;
         }
-        content.appendChild(background);
+
 
         Object.keys(data).forEach((key) => {
             const title = document.createElement("h2");
-            title.textContent = `${key} : ${data[key]}`;
+            title.textContent = `${key[0].toUpperCase() + key.substring(1)} : ${data[key]}`;
+            if(timeofday === "morning"){
+                title.style.color = "black";
+            }else if(timeofday === "afternoon"){
+                title.style.color = "black";
+            }else if(timeofday === "evening"){
+                title.style.color = "black";
+            }else{
+                title.style.color = "white";
+            }
             content.appendChild(title);
         })
+        content.appendChild(currenttext);
     })
 }
 
